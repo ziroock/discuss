@@ -5,41 +5,40 @@ import { Input, Button, Textarea, Popover, PopoverTrigger, PopoverContent } from
 import * as actions from '@/actions'
 import FormButton from '@/components/common/form-button'
 
-export default function TopicCreateForm() {
-  const [formState, action] = useFormState(actions.createTopic, { errors: {} })
-
+export default function PostCreateForm({ slug }) {
+  const [formState, action] = useFormState(actions.createPost.bind(null, slug), { errors: {} })
   return (
     <Popover placement="left">
       <PopoverTrigger>
-        <Button color="primary">Create a Topic</Button>
+        <Button color="primary">Create a Post</Button>
       </PopoverTrigger>
       <PopoverContent>
         <form action={action}>
           <div className="flex w-80 flex-col gap-4 p-4">
-            <h3 className="text-lg">Create a Topic</h3>
+            <h3 className="text-lg">Create a Post</h3>
             <Input
-              name="name"
-              label="Name"
+              name="title"
+              label="Title"
               labelPlacement="outside"
-              placeholder="Name"
-              isInvalid={!!formState.errors.name}
-              errorMessage={formState.errors.name?.join(', ')}
+              placeholder="Title"
+              isInvalid={!!formState.errors.title}
+              errorMessage={formState.errors.title?.join(', ')}
             />
-            {/* <div className="bg-red-400">{formState.errors.name.join(', ')}</div> if we werent using nextui*/}
+            {/* <div className="bg-red-400">{formState.errors.title.join(', ')}</div> if we werent using nextui*/}
             <Textarea
-              name="description"
-              label="Description"
+              name="content"
+              label="Content"
               labelPlacement="outside"
-              placeholder="Describe your topic"
-              isInvalid={!!formState.errors.description}
-              errorMessage={formState.errors.description?.join(', ')}
+              placeholder="Content"
+              isInvalid={!!formState.errors.content}
+              errorMessage={formState.errors.content?.join(', ')}
             />
             {formState.errors._form && (
               <div className="rounded-lg border border-red-400 bg-red-200 p-2">
                 {formState.errors._form.join(', ')}
               </div>
             )}
-            <FormButton>Submit</FormButton>
+            <FormButton>Create Post</FormButton>
           </div>
         </form>
       </PopoverContent>
