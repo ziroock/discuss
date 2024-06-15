@@ -1,19 +1,19 @@
 const paths = {
-  home() {
+  home(): string {
     return '/'
   },
   /**
    * @param {String} slug
    * @returns {String} The path to the topic page
    */
-  topicShow(slug) {
+  topicShow(slug: string): string {
     return `/topics/${slug}`
   },
   /**
    * @param {String} slug
    * @returns {String} The path to the new post page
    */
-  postCreate(slug) {
+  postCreate(slug: string): string {
     return `/topics/${slug}/posts/new`
   },
   /**
@@ -21,7 +21,7 @@ const paths = {
    * @param {String} postId
    * @returns {String} The path to the post page
    */
-  postShow(slug, postId) {
+  postShow(slug: string, postId: string): string {
     return `/topics/${slug}/posts/${postId}`
   },
 }

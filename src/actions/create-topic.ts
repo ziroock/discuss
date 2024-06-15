@@ -15,7 +15,19 @@ const createTopicSchema = z.object({
   description: z.string().min(10),
 })
 
-export async function createTopic(formState, formData) {
+interface CreateTopicFormState {
+  errors: {
+    name?: string[]
+    description?: string[]
+    // _form explained on lecutre 82
+    _form?: string[]
+  }
+}
+
+export async function createTopic(
+  formState: CreateTopicFormState,
+  formData: FormData,
+): Promise<CreateTopicFormState> {
   const result = createTopicSchema.safeParse({
     name: formData.get('name'),
     description: formData.get('description'),
@@ -45,7 +57,7 @@ export async function createTopic(formState, formData) {
   } catch (error) {
     if (error instanceof Error) {
       return {
-        errors: { _form: [err.message] },
+        errors: { _form: [error.message] },
       }
     } else {
       return {

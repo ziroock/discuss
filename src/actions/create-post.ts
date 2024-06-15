@@ -12,7 +12,19 @@ const createPostSchema = z.object({
   content: z.string().min(10),
 })
 
-export async function createPost(slug, formState, formData) {
+export interface CreatePostFormState {
+  errors: {
+    title?: string[]
+    content?: string[]
+    _form?: string[]
+  }
+}
+
+export async function createPost(
+  slug: string,
+  formState: CreatePostFormState,
+  formData: FormData,
+): Promise<CreatePostFormState> {
   const result = createPostSchema.safeParse({
     title: formData.get('title'),
     content: formData.get('content'),

@@ -4,7 +4,14 @@ import CommentList from '@/components/comments/comment-list'
 import CommentCreateForm from '@/components/comments/comment-create-form'
 import paths from '@/paths'
 
-export default async function PostShowPage({ params }) {
+interface PostShowPageProps {
+  params: {
+    slug: string
+    postId: string
+  }
+}
+
+export default async function PostShowPage({ params }: PostShowPageProps) {
   const { slug, postId } = params
 
   return (
@@ -12,8 +19,8 @@ export default async function PostShowPage({ params }) {
       <Link className="underline decoration-solid" href={paths.topicShow(slug)}>
         {'< '}Back to {slug}
       </Link>
-      {/* <PostShow /> */}
-      {/* <CommentCreateForm postId={postId} startOpen /> */}
+      <PostShow postId={postId} />
+      <CommentCreateForm postId={postId} startOpen />
       {/* <CommentList comments={comments} /> */}
     </div>
   )

@@ -6,9 +6,15 @@ import { Textarea, Button } from '@nextui-org/react'
 import FormButton from '@/components/common/form-button'
 import * as actions from '@/actions'
 
-export default function CommentCreateForm({ postId, parentId, startOpen }) {
+interface CommentCreateFormProps {
+  postId: string
+  parentId?: string
+  startOpen?: boolean
+}
+
+export default function CommentCreateForm({ postId, parentId, startOpen }: CommentCreateFormProps) {
   const [open, setOpen] = useState(startOpen)
-  const ref = (useRef < HTMLFormElement) | (null > null)
+  const ref = useRef<HTMLFormElement | null>(null)
   const [formState, action] = useFormState(actions.createComment.bind(null, { postId, parentId }), {
     errors: {},
   })

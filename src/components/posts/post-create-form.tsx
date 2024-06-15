@@ -5,8 +5,13 @@ import { Input, Button, Textarea, Popover, PopoverTrigger, PopoverContent } from
 import * as actions from '@/actions'
 import FormButton from '@/components/common/form-button'
 
-export default function PostCreateForm({ slug }) {
+interface PostCreateFormProps {
+  slug: string
+}
+
+export default function PostCreateForm({ slug }: PostCreateFormProps) {
   const [formState, action] = useFormState(actions.createPost.bind(null, slug), { errors: {} })
+
   return (
     <Popover placement="left">
       <PopoverTrigger>
